@@ -29,6 +29,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 9999;
 
   display: flex;
   align-items: center;
@@ -77,4 +78,49 @@
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 5px;
+}
+
+.notes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.note {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  position: relative;
+}
+
+.note h1 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.note p {
+  line-clamp: 3;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.note svg {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  width: 20px;
+}
+
+.note svg:nth-of-type(1) {
+  right: 40px;
+}
+
+.note svg:last-of-type:hover {
+  color: red;
 }
