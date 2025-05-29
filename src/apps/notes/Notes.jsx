@@ -26,6 +26,7 @@ const Notes = () => {
   const [showForm, setShowForm] = useState(false);
   const [isEditing, setIsEditing] = useState(null);
   const [notes, setNotes] = useState([]);
+  const [showMore, setShowMore] = useState(false);
 
   const addNote = (data) => {
     setNotes([...notes, data]);
@@ -64,7 +65,11 @@ const Notes = () => {
         {notes.map((note, index) => (
           <div key={index} className="note" style={{ backgroundColor: colors[index % colors.length] }}>
             <h1>{note.title}</h1>
-            <p>{note.message}</p>
+            <p className={showMore ? "" : "line-clamp-3"}>{note.message}</p>
+
+            <button onClick={() => setShowMore(!showMore)} style={{ display: note.message.length > 103 ? "block" : "none" }}>
+              Show {showMore ? "less" : "more"}
+            </button>
 
             <Pencil onClick={() => editNote(index)} />
             <Trash onClick={() => removeNote(index)} />

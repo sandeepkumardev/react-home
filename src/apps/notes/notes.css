@@ -101,7 +101,7 @@
   font-size: 20px;
 }
 
-.note p {
+.line-clamp-3 {
   line-clamp: 3;
   overflow: hidden;
   -webkit-line-clamp: 3;
