@@ -19,7 +19,7 @@ const Dialog = ({ editNote, updateNote, addNote, show, onClose }) => {
     if (editNote) {
       updateNote(form);
     } else {
-      addNote(form);
+      addNote({ ...form, id: Date.now() });
     }
     setForm({ title: "", message: "" });
     onClose();
@@ -28,12 +28,14 @@ const Dialog = ({ editNote, updateNote, addNote, show, onClose }) => {
   useEffect(() => {
     if (editNote) {
       setForm(editNote);
+    } else {
+      setForm({ title: "", message: "" });
     }
   }, [editNote]);
 
   return (
-    <div className="dialog" style={{ opacity: show ? 1 : 0, visibility: show ? "visible" : "hidden" }}>
-      <div className="dialog-content">
+    <div onClick={onClose} className="dialog" style={{ opacity: show ? 1 : 0, visibility: show ? "visible" : "hidden" }}>
+      <div className="dialog-content" onClick={(e) => e.stopPropagation()}>
         <h1>{editNote ? "Edit" : "Add"} Note</h1>
         <div className="form">
           <input name="title" type="text" value={form.title} onChange={handleInput} placeholder="Title" />

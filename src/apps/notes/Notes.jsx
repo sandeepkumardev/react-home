@@ -26,16 +26,20 @@ const Notes = () => {
   const [showForm, setShowForm] = useState(false);
   const [isEditing, setIsEditing] = useState(null);
   const [notes, setNotes] = useState([]);
-  const [showMore, setShowMore] = useState(false);
+  const [showMore, setShowMore] = useState(null);
+
+  console.log(notes);
 
   const addNote = (data) => {
     setNotes([...notes, data]);
   };
 
   const updateNote = (data) => {
-    const newNotes = [...notes];
-    newNotes[isEditing] = data;
-    setNotes(newNotes);
+    console.log(data);
+    // const newNotes = [...notes];
+    // newNotes[isEditing] = data;
+    const updatedNotes = notes.map((note) => (note.id === data.id ? data : note));
+    setNotes(updatedNotes);
   };
 
   const editNote = (index) => {
@@ -49,26 +53,28 @@ const Notes = () => {
     setNotes(newNotes);
   };
 
+  const onClose = () => {
+    setShowForm(false);
+    setIsEditing(null);
+  };
+
   return (
     <div className="notes">
-      <Navbar showForm={showForm} setShowForm={setShowForm} />
+      <Navbar setShowForm={setShowForm} />
 
-      <Dialog
-        editNote={notes[isEditing]}
-        updateNote={updateNote}
-        addNote={addNote}
-        show={showForm}
-        onClose={() => setShowForm(false)}
-      />
+      <Dialog editNote={notes[isEditing]} updateNote={updateNote} addNote={addNote} show={showForm} onClose={onClose} />
 
       <div className="notes-container">
         {notes.map((note, index) => (
           <div key={index} className="note" style={{ backgroundColor: colors[index % colors.length] }}>
             <h1>{note.title}</h1>
-            <p className={showMore ? "" : "line-clamp-3"}>{note.message}</p>
+            <p className={showMore == index ? "" : "line-clamp-3"}>{note.message}</p>
 
-            <button onClick={() => setShowMore(!showMore)} style={{ display: note.message.length > 103 ? "block" : "none" }}>
-              Show {showMore ? "less" : "more"}
+            <button
+              onClick={() => setShowMore(showMore == index ? null : `${index}`)}
+              style={{ display: note.message.length > 103 ? "block" : "none" }}
+            >
+              Show {showMore == index ? "less" : "more"}
             </button>
 
             <Pencil onClick={() => editNote(index)} />

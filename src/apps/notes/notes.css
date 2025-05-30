@@ -45,6 +45,7 @@
 
   width: 400px;
   position: relative;
+  /* z-index: 10000; */
 }
 
 .dialog-content .close-button {
