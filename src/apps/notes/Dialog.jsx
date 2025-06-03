@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import styles from "./notes.module.css";
 
 const Dialog = ({ editNote, updateNote, addNote, show, onClose }) => {
   const [form, setForm] = useState({
@@ -34,15 +35,19 @@ const Dialog = ({ editNote, updateNote, addNote, show, onClose }) => {
   }, [editNote]);
 
   return (
-    <div onClick={onClose} className="dialog" style={{ opacity: show ? 1 : 0, visibility: show ? "visible" : "hidden" }}>
-      <div className="dialog-content" onClick={(e) => e.stopPropagation()}>
+    <div
+      onClick={onClose}
+      className={styles.dialog}
+      style={{ opacity: show ? 1 : 0, visibility: show ? "visible" : "hidden" }}
+    >
+      <div className={styles.dialog_content} onClick={(e) => e.stopPropagation()}>
         <h1>{editNote ? "Edit" : "Add"} Note</h1>
-        <div className="form">
+        <div className={styles.form}>
           <input name="title" type="text" value={form.title} onChange={handleInput} placeholder="Title" />
           <textarea name="message" value={form.message} onChange={handleInput} placeholder="Message" />
           <button onClick={handleSubmit}>{editNote ? "Update" : "Save"}</button>
         </div>
-        <button className="close-button" onClick={onClose}>
+        <button className={styles.close_button} onClick={onClose}>
           X
         </button>
       </div>

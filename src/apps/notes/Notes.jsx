@@ -1,7 +1,6 @@
 import Dialog from "./Dialog";
-import Navbar from "./Navbar";
 import { useState } from "react";
-import "./notes.css";
+import styles from "./notes.module.css";
 import { Pencil } from "lucide-react";
 import { Trash } from "lucide-react";
 
@@ -59,16 +58,19 @@ const Notes = () => {
   };
 
   return (
-    <div className="notes">
-      <Navbar setShowForm={setShowForm} />
+    <div className={styles.notes}>
+      <div className={styles.header}>
+        <h2>Notes App</h2>
+        <button onClick={() => setShowForm(true)}>Add Note</button>
+      </div>
 
       <Dialog editNote={notes[isEditing]} updateNote={updateNote} addNote={addNote} show={showForm} onClose={onClose} />
 
-      <div className="notes-container">
+      <div className={styles.notes_container}>
         {notes.map((note, index) => (
-          <div key={index} className="note" style={{ backgroundColor: colors[index % colors.length] }}>
+          <div key={index} className={styles.note} style={{ backgroundColor: colors[index % colors.length] }}>
             <h1>{note.title}</h1>
-            <p className={showMore == index ? "" : "line-clamp-3"}>{note.message}</p>
+            <p className={showMore == index ? "" : styles.line_clamp_3}>{note.message}</p>
 
             <button
               onClick={() => setShowMore(showMore == index ? null : `${index}`)}
