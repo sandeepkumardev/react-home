@@ -16,12 +16,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* <div>
-        <Link to={"/"} style={{ marginRight: "20px" }}>
-          Home
-        </Link>
-        <Link to="/about">About</Link>
-      </div> */}
+      <Link to="/signin">Sign In</Link>
 
       <Sidebar show={showSidebar} onClose={() => setShowSidebar(false)} />
     </div>

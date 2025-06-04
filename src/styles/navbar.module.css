@@ -18,7 +18,15 @@
   cursor: pointer;
 }
 
-.header_icon a {
+.navbar a {
   color: #fff;
   text-decoration: none;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+.navbar h2 {
+  font-family: "Noto Sans", sans-serif;
 }
