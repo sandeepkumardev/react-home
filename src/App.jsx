@@ -7,20 +7,25 @@ import Navbar from "./components/Navbar";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import AuthProvider from "./context/auth-context";
+import Todos from "./apps/todos/Todos";
+import TodosProvider from "./context/todos-context";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/notes" element={<Notes />} />
+        <TodosProvider>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/notes" element={<Notes />} />
+            <Route path="/todos" element={<Todos />} />
 
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-        </Routes>
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+          </Routes>
+        </TodosProvider>
       </AuthProvider>
     </BrowserRouter>
   );

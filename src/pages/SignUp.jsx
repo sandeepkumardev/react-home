@@ -1,17 +1,18 @@
 import React from "react";
 import styles from "../styles/auth.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { authContext } from "../context/auth-context";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const { users, setUsers } = useContext(authContext);
   const [error, setError] = React.useState("");
   const [form, setForm] = React.useState({
-    name: "",
-    username: "",
-    password: "",
-    confirm_password: "",
+    name: "sandeep",
+    username: "sandeep",
+    password: "hola",
+    confirm_password: "hola",
   });
 
   const handleInput = (e) => {
@@ -48,6 +49,8 @@ const SignUp = () => {
       password: "",
       confirm_password: "",
     });
+
+    navigate("/signin");
   };
 
   return (

@@ -30,3 +30,18 @@
 .navbar h2 {
   font-family: "Noto Sans", sans-serif;
 }
+
+.profile_box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile_box svg {
+  width: 16px;
+  cursor: pointer;
+}
+
+.profile_box svg:hover {
+  color: red;
+}

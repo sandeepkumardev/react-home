@@ -4,6 +4,7 @@ import styles from "../styles/sidebar.module.css";
 import { Link } from "react-router-dom";
 import { Home } from "lucide-react";
 import { Notebook } from "lucide-react";
+import { ListTodo } from "lucide-react";
 
 const sidebarLinks = [
   {
@@ -20,6 +21,11 @@ const sidebarLinks = [
     label: "Notes",
     link: "/notes",
     Icon: Notebook,
+  },
+  {
+    label: "Todos",
+    link: "/todos",
+    Icon: ListTodo,
   },
 ];
 

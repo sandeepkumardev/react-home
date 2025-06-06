@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import styles from "./notes.module.css";
+import styles from "../../styles/notes.module.css";
 
 const Dialog = ({ editNote, updateNote, addNote, show, onClose }) => {
   const [form, setForm] = useState({

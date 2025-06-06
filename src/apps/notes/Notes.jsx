@@ -1,6 +1,6 @@
 import Dialog from "./Dialog";
 import { useState } from "react";
-import styles from "./notes.module.css";
+import styles from "../../styles/notes.module.css";
 import { Pencil } from "lucide-react";
 import { Trash } from "lucide-react";
 
