@@ -5,7 +5,7 @@ import { authContext } from "../context/auth-context";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const { users, setCurrentUser } = useContext(authContext);
+  const { setCurrentUser } = useContext(authContext);
   const [error, setError] = React.useState("");
   const [form, setForm] = React.useState({
     username: "sandeep",
@@ -19,7 +19,7 @@ const SignIn = () => {
     setForm({ ...form, [eleName]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -28,24 +28,33 @@ const SignIn = () => {
       return;
     }
 
-    const userExists = users.find((u) => u.username === form.username);
-    if (userExists && userExists.password !== form.password) {
-      setError("Invalid password");
-      return;
-    }
-
-    if (userExists) {
-      setCurrentUser({
-        name: userExists.name,
-        username: userExists.username,
+    try {
+      const res = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
       });
 
+      const data = await res.json();
+
+      if (!data.success) {
+        setError(data.message || "Login failed");
+        return;
+      }
+
+      setCurrentUser({
+        id: data.data._id,
+        name: data.data.name,
+        username: data.data.username,
+      });
       setForm({ username: "", password: "" });
       navigate("/");
-      return;
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("Something went wrong!");
     }
-
-    setError("User does not exist!");
   };
 
   return (

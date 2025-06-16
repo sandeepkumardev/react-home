@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Home } from "lucide-react";
 import { Notebook } from "lucide-react";
 import { ListTodo } from "lucide-react";
+import { User2Icon } from "lucide-react";
 
 const sidebarLinks = [
   {
@@ -26,6 +27,11 @@ const sidebarLinks = [
     label: "Todos",
     link: "/todos",
     Icon: ListTodo,
+  },
+  {
+    label: "Profile",
+    link: "/profile",
+    Icon: User2Icon,
   },
 ];
 

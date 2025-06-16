@@ -1,12 +1,9 @@
 import React from "react";
 import styles from "../styles/auth.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { authContext } from "../context/auth-context";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const { users, setUsers } = useContext(authContext);
   const [error, setError] = React.useState("");
   const [form, setForm] = React.useState({
     name: "sandeep",
@@ -22,7 +19,7 @@ const SignUp = () => {
     setForm({ ...form, [eleName]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -36,21 +33,35 @@ const SignUp = () => {
       return;
     }
 
-    const userExists = users.find((u) => u.username === form.username);
-    if (userExists) {
-      setError("User already exists!");
+    try {
+      const res = await fetch("http://localhost:3000/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        setError(data.message || "Sign Up failed");
+        return;
+      }
+
+      setForm({
+        name: "",
+        username: "",
+        password: "",
+        confirm_password: "",
+      });
+
+      navigate("/signin");
+    } catch (error) {
+      console.error("Sign Up error:", error);
+      setError("Something went wrong!");
       return;
     }
-
-    setUsers([...users, form]);
-    setForm({
-      name: "",
-      username: "",
-      password: "",
-      confirm_password: "",
-    });
-
-    navigate("/signin");
   };
 
   return (
